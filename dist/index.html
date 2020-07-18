@@ -10,8 +10,11 @@
       margin: 0;
       padding: 0;
       box-sizing: border-box;
+      color: #6b6b6b;
+    }
+    body {
+      width: 100vw;
       background-color: rgb(243, 243, 243);
-      color: #858585;
       font-family: Arial, Helvetica, sans-serif;
     }
     .nav {
@@ -31,18 +34,38 @@
       outline: none;
       border: none;
       background-color: transparent;
+      font-size: large;
+      padding: 20px;
     }
     .logo {
       margin-left: 5%;
+      font-size: smaller;
     }
     .home,
     .about,
     .contact {
-      width: 100vw;
+      width: 90vw;
       height: 90vh;
+      margin: 0 5vw;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
-    span {
-      font-size: 400px;
+    p {
+      font-size: 100px;
+      background-color: transparent;
+      clip-path: polygon(
+        20% 0%,
+        80% 0%,
+        100% 20%,
+        100% 80%,
+        80% 100%,
+        20% 100%,
+        0% 80%,
+        0% 20%
+      );
+      padding: 50px;
+      border: 1px solid rgb(87, 87, 87);
     }
   </style>
   <script>
@@ -102,13 +125,13 @@
       }
 
       function home() {
-        return `<span>HEY</span>`;
+        return `<p>Home page</p>`;
       }
       function about() {
-        return `<p>You are on About Page Nigga</p>`;
+        return `<p>About page</p>`;
       }
       function contact() {
-        return `<p>You are on Contact Page</p>`;
+        return `<p>Contact page</p>`;
       }
     };
   </script>
