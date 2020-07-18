@@ -70,7 +70,7 @@
   </style>
   <script>
     window.onload = () => {
-      window.history.replaceState({}, "name", ["/"]);
+      window.history.replaceState({}, "name", ["/mywebsite"]);
       const view = document.getElementById("view");
       const activeRoutes = Array.from(document.querySelectorAll("[route]"));
 
@@ -118,7 +118,7 @@
         },
       ]);
       const currentPath = window.location.pathname;
-      if (currentPath === "/") {
+      if (currentPath === "/mywebsite") {
         view.innerHTML = `<div class="${
           myFirstRouter.routes[0].class
         }">${home()} </div>`;
