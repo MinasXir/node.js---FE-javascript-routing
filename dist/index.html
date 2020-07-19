@@ -23,12 +23,25 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      animation: fadein 1s;
+    }
+
+    @keyframes fadein {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+    .logo {
+      margin-left: 5%;
+      font-size: smaller;
     }
     .links {
-      width: 45vw;
       display: flex;
-      justify-content: space-around;
       align-items: center;
+      margin-right: 5%;
     }
     button {
       outline: none;
@@ -37,9 +50,8 @@
       font-size: large;
       padding: 20px;
     }
-    .logo {
-      margin-left: 5%;
-      font-size: smaller;
+    button:nth-child(3) {
+      padding-right: 0px;
     }
     .home,
     .about,
@@ -47,15 +59,13 @@
       width: 90vw;
       height: 90vh;
       margin: 0 5vw;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      animation: fadein 1.5s;
     }
-    .right,
-    .left {
-      background-color: hsl(0, 100%, 90%);
-      height: 60vh;
-      width: 35vw;
+    .homeContent {
+      padding-top: 200px;
+    }
+    .homeContent span {
+      font-size: 150px;
     }
   </style>
   <script>
@@ -75,18 +85,31 @@
         const routInfo = myFirstRouter.routes.filter((r) => {
           return r.path === route;
         })[0];
-
         if (!routInfo) {
           alert("No content here");
         } else {
           window.history.pushState({}, "name", routInfo.path);
           view.innerHTML = `<div class="${routInfo.class}">${routInfo.teamplate} </div>`;
         }
+        changLogo();
       }
       //click event trigers navigation
       activeRoutes.forEach((route) => {
         route.addEventListener("click", navigate, true);
       });
+      function changLogo() {
+        const logo = document.querySelector(".logo h1");
+        if (window.location.pathname === "/mywebsite") {
+          logo.innerHTML = "Home";
+        }
+        if (window.location.pathname === "/about") {
+          logo.innerHTML = "About";
+        }
+        if (window.location.pathname === "/contact") {
+          logo.innerHTML = "Contact";
+        }
+      }
+
       //data constructor
       const Router = function (name, routes) {
         return {
@@ -123,13 +146,14 @@
       }
       //Static pages
       function home() {
-        return `<div class="left">nnjnjn</div><div class="right"></div>`;
+        return `<div class="homeContent"><span>Hey!</span><p>My name is Minas, thank you for
+          visting my page</p></div>`;
       }
       function about() {
-        return `<div class="left"></div><div class="right"></div>`;
+        return `About page`;
       }
       function contact() {
-        return `<div class="left"></div><div class="right"></div>`;
+        return `Contact page`;
       }
     });
   </script>
@@ -137,8 +161,9 @@
   <body>
     <div class="nav">
       <div class="logo">
-        <h1>Minas Xirakias</h1>
+        <h1>Welcome</h1>
       </div>
+
       <div class="links">
         <button route="/mywebsite">Home</button>
         <button route="/about">About</button>
