@@ -3,83 +3,27 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/style.css" />
     <title>My App</title>
   </head>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      color: #6b6b6b;
-    }
-    body {
-      width: 100vw;
-      background-color: rgb(243, 243, 243);
-      font-family: Arial, Helvetica, sans-serif;
-    }
-    .nav {
-      height: 10vh;
-      width: 100vw;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .links {
-      width: 45vw;
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-    }
-    button {
-      outline: none;
-      border: none;
-      background-color: transparent;
-      font-size: large;
-      padding: 20px;
-    }
-    .logo {
-      margin-left: 5%;
-      font-size: smaller;
-    }
-    .home,
-    .about,
-    .contact {
-      width: 90vw;
-      height: 90vh;
-      margin: 0 5vw;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    p {
-      font-size: 100px;
-      background-color: transparent;
-      clip-path: polygon(
-        20% 0%,
-        80% 0%,
-        100% 20%,
-        100% 80%,
-        80% 100%,
-        20% 100%,
-        0% 80%,
-        0% 20%
-      );
-      padding: 50px;
-      border: 1px solid rgb(87, 87, 87);
-    }
-  </style>
   <script>
-    window.onload = () => {
+    window.addEventListener("DOMContentLoaded", (event) => {
+      //start from home when refresh
       window.history.replaceState({}, "name", ["/mywebsite"]);
+
+      //select app view
       const view = document.getElementById("view");
+
+      //select all buttons
       const activeRoutes = Array.from(document.querySelectorAll("[route]"));
 
+      //Function
       function navigate(eEvent) {
         const route = eEvent.target.attributes[0].value;
         const routInfo = myFirstRouter.routes.filter((r) => {
           return r.path === route;
         })[0];
-        console.log(routInfo);
+
         if (!routInfo) {
           alert("No content here");
         } else {
@@ -87,10 +31,11 @@
           view.innerHTML = `<div class="${routInfo.class}">${routInfo.teamplate} </div>`;
         }
       }
-
+      //click event trigers navigation
       activeRoutes.forEach((route) => {
         route.addEventListener("click", navigate, true);
       });
+      //data constructor
       const Router = function (name, routes) {
         return {
           name: name,
@@ -117,23 +62,24 @@
           teamplate: contact(),
         },
       ]);
+      //Home page as starting point
       const currentPath = window.location.pathname;
       if (currentPath === "/mywebsite") {
         view.innerHTML = `<div class="${
           myFirstRouter.routes[0].class
         }">${home()} </div>`;
       }
-
+      //Static pages
       function home() {
-        return `<p>Home page</p>`;
+        return `<div class="left">nnjnjn</div><div class="right"></div>`;
       }
       function about() {
-        return `<p>About page</p>`;
+        return `<div class="left"></div><div class="right"></div>`;
       }
       function contact() {
-        return `<p>Contact page</p>`;
+        return `<div class="left"></div><div class="right"></div>`;
       }
-    };
+    });
   </script>
 
   <body>
