@@ -1,133 +1,128 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Minas Xirakias</title>
-<link rel="icon" href="favv.svg" sizes="any" type="image/svg+xml">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Minas Xirakias</title>
+  <link rel="icon" href="favv.svg" sizes="any" type="image/svg+xml">
   <link rel="stylesheet" href="style.css">
-
-  </head>
-
-
-  <body>
-    <div class="nav">
-      <div class="logo">
-        <h3>Minas Xirakias</h3>
-      </div>
-
-      <div class="links">
-        <button route="/mywebsite" class="active">Home</button>
-        <button route="/about">About</button>
-        <button route="/contact">Contact</button>
-      </div>
+</head>
+<body>
+  <div class="nav">
+    <div class="logo">
+      <h3>Minas Xirakias</h3>
     </div>
-    <div id="view"></div>
-  </body>
-    </style>
-    <script>
-      window.addEventListener("DOMContentLoaded", (event) => {
-        //start from home if refresh
-        window.history.replaceState({}, "name", ["/mywebsite"]);
+    <div class="links">
+      <button route="/mywebsite" class="active">Home</button>
+      <button route="/about">About</button>
+      <button route="/contact">Contact</button>
+    </div>
+  </div>
+  <div id="view"></div>
+</body>
+</style>
+<script>
+  window.addEventListener("DOMContentLoaded", (event) => {
+    //start from home if refresh
+    window.history.replaceState({}, "name", ["/mywebsite"]);
 
-        //select app view
-        const view = document.getElementById("view");
+    //select app view
+    const view = document.getElementById("view");
 
-        //select all buttons
-        const activeRoutes = Array.from(
-          document.querySelectorAll(".links [route]")
-        );
+    //select all buttons
+    const activeRoutes = Array.from(
+      document.querySelectorAll(".links [route]")
+    );
 
-        //Function for navigation
-        function navigate(eEvent) {
-          const route = eEvent.target.attributes[0].value;
-          const routInfo = myFirstRouter.routes.filter((r) => {
-            return r.path === route;
-          })[0];
-          if (!routInfo) {
-            alert("No content here");
-          } else {
-            window.history.pushState({}, "name", routInfo.path);
-            view.innerHTML = `<div class="${routInfo.class}">${routInfo.teamplate} </div>`;
-          }
-          activeRoute(eEvent);
-          aboutNav();
-        }
-        //click event trigers navigation function
-        activeRoutes.forEach((route) => {
-          route.addEventListener("click", navigate, true);
-        });
+    //Function for navigation
+    function navigate(eEvent) {
+      const route = eEvent.target.attributes[0].value;
+      const routInfo = myFirstRouter.routes.filter((r) => {
+        return r.path === route;
+      })[0];
+      if (!routInfo) {
+        alert("No content here");
+      } else {
+        window.history.pushState({}, "name", routInfo.path);
+        view.innerHTML = `<div class="${routInfo.class}">${routInfo.teamplate} </div>`;
+      }
+      activeRoute(eEvent);
+      aboutNav();
+    }
+    //click event trigers navigation function
+    activeRoutes.forEach((route) => {
+      route.addEventListener("click", navigate, true);
+    });
 
-        //Active color on nav item click
-        function activeRoute(eEvent) {
-          const buttons = Array.from(document.querySelectorAll("button"));
-          buttons.forEach((button) => {
-            button.classList.remove("active");
-          });
-          eEvent.target.className = "active";
-        }
+    //Active color on nav item click
+    function activeRoute(eEvent) {
+      const buttons = Array.from(document.querySelectorAll("button"));
+      buttons.forEach((button) => {
+        button.classList.remove("active");
+      });
+      eEvent.target.className = "active";
+    }
 
-        //data constructor
-        const Router = function (name, routes) {
-          return {
-            name: name,
-            routes: routes,
-          };
-        };
-        const myFirstRouter = new Router("myFirstRouter", [
-          {
-            path: "/mywebsite",
-            name: "Root",
-            class: "home",
-            teamplate: home(),
-          },
-          {
-            path: "/about",
-            name: "About",
-            class: "about",
-            teamplate: about(),
-          },
-          {
-            path: "/contact",
-            name: "Contact",
-            class: "contact",
-            teamplate: contact(),
-          },
-        ]);
-        //Home page as starting point
-        const currentPath = window.location.pathname;
-        if (currentPath === "/mywebsite") {
-          view.innerHTML = `<div class="${myFirstRouter.routes[0].class}"> ${myFirstRouter.routes[0].teamplate}</div>`;
-        }
-        //Static pages
-        function home() {
-          return `<h2>
+    //data constructor
+    const Router = function (name, routes) {
+      return {
+        name: name,
+        routes: routes,
+      };
+    };
+    const myFirstRouter = new Router("myFirstRouter", [
+      {
+        path: "/mywebsite",
+        name: "Root",
+        class: "home",
+        teamplate: home(),
+      },
+      {
+        path: "/about",
+        name: "About",
+        class: "about",
+        teamplate: about(),
+      },
+      {
+        path: "/contact",
+        name: "Contact",
+        class: "contact",
+        teamplate: contact(),
+      },
+    ]);
+    //Home page as starting point
+    const currentPath = window.location.pathname;
+    if (currentPath === "/mywebsite") {
+      view.innerHTML = `<div class="${myFirstRouter.routes[0].class}"> ${myFirstRouter.routes[0].teamplate}</div>`;
+    }
+    //Static pages
+    function home() {
+      return `<h2>
                 Hi , I'm Minas a UI <span>developer</span> and UX <span>designer</span> <br>based in Amsterdam.
                 </h2>
                 <br>
                 <button route="/about">About me</button>
-    
-    
                  `;
-        }
-        function about() {
-          return ` about`;
-        }
-        function contact() {
-          return `contact `;
-        }
-        function aboutNav() {
-          const btn = document
-            .querySelector(".home button");
-            if (btn)
-            btn.addEventListener("click", (eEvent) => {
-              navigate(eEvent);
-                Array.from(
-                document.querySelectorAll(".links [route]")
-              )[1].classList.add('active');
-            });
-        }
-        aboutNav();
-      });
-    </script>
+    }
+    function about() {
+      return ` about`;
+    }
+    function contact() {
+      return `contact `;
+    }
+    //link to about page on homepage as button
+    function aboutNav() {
+      const btn = document
+        .querySelector(".home button");
+      if (btn)
+        btn.addEventListener("click", (eEvent) => {
+          navigate(eEvent);
+          Array.from(
+            document.querySelectorAll(".links [route]")
+          )[1].classList.add('active');
+        });
+    }
+    aboutNav();
+  });
+</script>
 </html>
