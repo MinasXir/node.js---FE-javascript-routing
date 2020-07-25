@@ -2,7 +2,6 @@ const express = require("express");
 const app = express();
 const path = require("path");
 const port = 3000;
-app.use(express.static(__dirname + "/style.css"));
 
 app.get("*", (req, res) => {
   res.sendFile("index.html", { root: path.join(__dirname, "/") });
