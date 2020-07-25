@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Minas Xirakias</title>
-  <link rel="icon" href="favv.svg" sizes="any" type="image/svg+xml">
-  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="favv.svg" sizes="any" type="image/svg+xml"/>
+  <link rel="icon" type="image/png" href="favv.png" />
+  <link rel="stylesheet" href="style.css"/>
 </head>
+
 <body>
   <div class="nav">
     <div class="logo">
@@ -23,16 +26,14 @@
 </body>
 </style>
 <script>
-    function darkMode() {
-        const container = document.body;
-        container.classList.toggle("dark-mode");
-         const darkButton = document.getElementById("darkButton");
-      if (darkButton.innerHTML === "dark") {
-        darkButton.innerHTML = "light";
-      } else {
-        darkButton.innerHTML = "dark";
-      }
-      }
+  function darkMode() {
+    const container = document.body;
+    container.classList.toggle("dark-mode");
+    const darkButton = document.getElementById("darkButton");
+    darkButton.innerHTML === "dark" ? darkButton.innerHTML = "light"
+      : darkButton.innerHTML = "dark";
+
+  }
   window.addEventListener("DOMContentLoaded", (event) => {
     //start from home if refresh
     window.history.replaceState({}, "name", ["/mywebsite"]);
@@ -51,12 +52,12 @@
       const routInfo = myFirstRouter.routes.filter((r) => {
         return r.path === route;
       })[0];
-      if (!routInfo) {
-        alert("No content here");
-      } else {
+      !routInfo ?
+        alert("No content here")
+       : 
         window.history.pushState({}, "name", routInfo.path);
         view.innerHTML = `<div class="${routInfo.class}">${routInfo.teamplate} </div>`;
-      }
+      
       activeRoute(eEvent);
       aboutNav();
     }
@@ -136,4 +137,5 @@
     aboutNav();
   });
 </script>
+
 </html>
