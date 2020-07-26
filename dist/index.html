@@ -5,9 +5,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Minas Xirakias</title>
-  <link rel="icon" href="favv.svg" sizes="any" type="image/svg+xml"/>
+  <link rel="icon" href="favv.svg" sizes="any" type="image/svg+xml" />
   <link rel="icon" type="image/png" href="favv.png" />
-  <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
@@ -19,21 +19,29 @@
       <button route="/mywebsite" class="active">Home</button>
       <button route="/about">About</button>
       <button route="/contact">Contact</button>
-      <button id="darkButton" onclick="darkMode()">dark</button>
+      <button id="darkButton" onclick="darkMode()">Dark</button>
+      <select id="select-theme" class="select-css">
+        <option disabled>Theme:</option>
+        <option value="Light">Light</option>
+        <option value="Dark">Dark</option>
+      </select>
     </div>
   </div>
   <div id="view"></div>
 </body>
 </style>
 <script>
+  //dark mode
+  document.getElementById('select-theme').addEventListener('change', function () {
+    this.value === "Dark" ? document.body.classList.toggle("dark-mode") : document.body.classList.remove("dark-mode")
+  });
   function darkMode() {
-    const container = document.body;
-    container.classList.toggle("dark-mode");
+    document.body.classList.toggle("dark-mode");
     const darkButton = document.getElementById("darkButton");
-    darkButton.innerHTML === "dark" ? darkButton.innerHTML = "light"
-      : darkButton.innerHTML = "dark";
-
+    darkButton.innerHTML === "Dark" ? darkButton.innerHTML = "Light"
+      : darkButton.innerHTML = "Dark";
   }
+
   window.addEventListener("DOMContentLoaded", (event) => {
     //start from home if refresh
     window.history.replaceState({}, "name", ["/mywebsite"]);
@@ -54,10 +62,10 @@
       })[0];
       !routInfo ?
         alert("No content here")
-       : 
+        :
         window.history.pushState({}, "name", routInfo.path);
-        view.innerHTML = `<div class="${routInfo.class}">${routInfo.teamplate} </div>`;
-      
+      view.innerHTML = `<div class="${routInfo.class}">${routInfo.teamplate} </div>`;
+
       activeRoute(eEvent);
       aboutNav();
     }
@@ -109,7 +117,8 @@
     }
     //Static pages
     function home() {
-      return `<h2>
+      return `
+                <h2>
                 Hi , I'm Minas a UI <span>developer</span> and UX <span>designer</span> <br>based in Amsterdam.
                 </h2>
                 <br>
@@ -117,7 +126,12 @@
                  `;
     }
     function about() {
-      return ` about`;
+      return ` 
+               <div class="about-top-left"></div>
+               <div class="about-top-right"></div>
+               <div class="about-left-bottom"></div>
+               <div class="about-right-bottom"></div>
+                 `;
     }
     function contact() {
       return `contact `;
