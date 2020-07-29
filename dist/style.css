@@ -135,8 +135,4 @@ button:hover {
     font-size: medium;
     padding: 10px;
   }
-  .about > * {
-    height: auto;
-    width: 100%;
-  }
 }
