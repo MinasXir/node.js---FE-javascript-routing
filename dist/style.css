@@ -131,7 +131,7 @@ button:hover {
     width: 96vw;
     margin: 0% 2%;
   }
-  .about {
+  .about > * {
     width: 96vw;
     margin: 0% 2%;
   }
