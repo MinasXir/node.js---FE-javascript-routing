@@ -90,7 +90,7 @@
         };
         const myFirstRouter = new Router("myFirstRouter", [
           {
-            path: "/mywebsite",
+            path: "/",
             name: "Root",
             class: "home",
             teamplate: home(),
@@ -109,19 +109,7 @@
           },
         ]);
         //Home page as starting point
-        const currentPath = window.location.pathname;
-        if (currentPath === "/mywebsite") {
-          view.innerHTML = `<div class="${myFirstRouter.routes[0].class}"> 
-            ${myFirstRouter.routes[0].teamplate}</div>`;
-        }
-        if (currentPath === "/about") {
-          view.innerHTML = `<div class="${myFirstRouter.routes[1].class}"> 
-            ${myFirstRouter.routes[1].teamplate}</div>`;
-        }
-        if (currentPath === "/contact") {
-          view.innerHTML = `<div class="${myFirstRouter.routes[2].class}"> 
-            ${myFirstRouter.routes[2].teamplate}</div>`;
-        }
+
         //Static pages
         function home() {
           return `
