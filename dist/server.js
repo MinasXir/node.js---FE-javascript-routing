@@ -7,6 +7,12 @@ app.use(express.static(__dirname + "/public"));
 app.get("*", (req, res) => {
   res.sendFile("index.html", { root: path.join(__dirname, "/") });
 });
+app.get("*", (req, res) => {
+  res.sendFile("index.html", { root: path.join(__dirname, "/about") });
+});
+app.get("*", (req, res) => {
+  res.sendFile("index.html", { root: path.join(__dirname, "/contact") });
+});
 
 app.listen(port, () =>
   console.log(`Example app listening at http://localhost:${port}`)
