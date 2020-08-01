@@ -69,6 +69,12 @@ body {
 .about > * {
   border: 1px solid teal;
   width: 80vw;
+  position: relative;
+}
+.box-right {
+  position: absolute;
+  right: 0%;
+  top: 45%;
 }
 .about-top {
   height: 85vh;

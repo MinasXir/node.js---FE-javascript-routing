@@ -23,19 +23,27 @@
     </div>
     <div id="view"></div>
     <script>
+      //always start from home
+      window.history.replaceState({}, "name", ["/mywebsite"]);
       //dark mode
       function darkMode() {
         document.body.classList.toggle("dark-mode");
         const darkButton = document.getElementById("darkButton");
         darkButton.innerHTML === "Dark"
-          ? (darkButton.innerHTML = "Light")
-          : (darkButton.innerHTML = "Dark");
+          ? (darkButton.innerHTML = "Light") &&
+            localStorage.setItem("mode", "dark")
+          : (darkButton.innerHTML = "Dark") &&
+            localStorage.removeItem("mode", "dark");
       }
 
-      window.addEventListener("DOMContentLoaded", (event) => {
-        //start from home if refresh
-        window.history.replaceState({}, "name", ["/mywebsite"]);
+      //save dark mode in local storage if page refresh
+      if (localStorage.getItem("mode") == "dark") {
+        document.body.classList.add("dark-mode");
+        darkButton.innerHTML = "Light";
+      } else document.body.classList.remove("dark-mode");
 
+      //App
+      window.addEventListener("DOMContentLoaded", (event) => {
         //select app view
         const view = document.getElementById("view");
 
@@ -141,7 +149,9 @@
                  aboutData.titleAbout
                }</h2><br>
                ${aboutData.descriptionAbout}
+               <div class="box-right">
               <h4>Go Middle</h4>
+              </div>
                </div>
                <div id="about-middle" class="about-middle">
                <div>
@@ -168,12 +178,16 @@
             )
             .join("")}
                </div>
+               <div class="box-right">
                <h4>Go Top</h4>
                <h4>Go Bottom</h4>
                </div>
+               </div>
                <div id="about-bottom" class="about-bottom">
+               <div class="box-right">
               <h4>Go Top</h4>
                <h4>Go Middle</h4>
+               </div>
                 </div>
                  `;
         }
@@ -181,7 +195,8 @@
           return `contact `;
         }
         aboutNav();
-        function alla() {
+
+        function aboutScrollLinks() {
           const laka = Array.from(document.querySelectorAll("h4"));
           var i;
           for (i = 0; i < laka.length; i++) {
@@ -219,7 +234,7 @@
                 document.querySelectorAll(".links [route]")
               )[1].classList.add("active");
             });
-          alla();
+          aboutScrollLinks();
         }
       });
     </script>

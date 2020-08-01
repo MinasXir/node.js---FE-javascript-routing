@@ -8,6 +8,10 @@ app.get("*", (req, res) => {
   res.sendFile("index.html", { root: path.join(__dirname, "/") });
 });
 
+app.post("*", (req, res) => {
+  res.sendFile("index.html", { root: path.join(__dirname, "/") });
+});
+
 app.listen(port, () =>
   console.log(`Example app listening at http://localhost:${port}`)
 );
