@@ -110,6 +110,7 @@
           currentPath === "/mywebsite" ||
           performance.navigation.type == performance.navigation.TYPE_RELOAD
         ) {
+          console.log("page loaded again");
           window.history.replaceState({}, "name", ["/mywebsite"]);
           view.innerHTML = `<div class="${myFirstRouter.routes[0].class}"> ${myFirstRouter.routes[0].teamplate}</div>`;
         }
