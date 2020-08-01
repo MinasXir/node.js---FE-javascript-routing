@@ -41,10 +41,6 @@
       } else document.body.classList.remove("dark-mode");
 
       window.addEventListener("DOMContentLoaded", (event) => {
-        //start from home if refresh
-
-        window.history.replaceState({}, "name", ["/mywebsite"]);
-
         //select app view
         const view = document.getElementById("view");
 
@@ -223,6 +219,11 @@
               });
             }
           }
+        }
+        //start from home if refresh
+        if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
+          window.history.replaceState({}, "name", ["/mywebsite"]);
+          view.innerHTML = `<div class="${myFirstRouter.routes[0].class}"> ${myFirstRouter.routes[0].teamplate}</div>`;
         }
 
         //link to about page on homepage as button
