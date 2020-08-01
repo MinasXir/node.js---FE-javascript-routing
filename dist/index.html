@@ -15,7 +15,7 @@
         <h3>Minas Xirakias</h3>
       </div>
       <div class="links">
-        <button route="/" class="active">Home</button>
+        <button route="/mywebsite" class="active">Home</button>
         <button route="/about">About</button>
         <button route="/contact">Contact</button>
         <button id="darkButton" onclick="darkMode()">Dark</button>
@@ -24,7 +24,7 @@
     <div id="view"></div>
     <script>
       //always start from home
-      window.history.replaceState({}, "name", ["/"]);
+
       //dark mode
       function darkMode() {
         document.body.classList.toggle("dark-mode");
@@ -89,7 +89,7 @@
         };
         const myFirstRouter = new Router("myFirstRouter", [
           {
-            path: "/",
+            path: "/mywebsite",
             name: "Root",
             class: "home",
             teamplate: home(),
@@ -109,7 +109,7 @@
         ]);
         //Home page as starting point
         const currentPath = window.location.pathname;
-        if (currentPath === "/") {
+        if (currentPath === "/mywebsite") {
           view.innerHTML = `<div class="${myFirstRouter.routes[0].class}"> 
             ${myFirstRouter.routes[0].teamplate}</div>`;
         }
