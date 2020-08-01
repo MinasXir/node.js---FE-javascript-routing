@@ -13,9 +13,9 @@
         <h3>Minas Xirakias</h3>
       </div>
       <div class="links">
-        <button route="/mywebsite/" class="active">Home</button>
-        <button route="/about">About</button>
-        <button route="/contact">Contact</button>
+        <button route="/mywebsite/home" class="active">Home</button>
+        <button route="/mywebsite/about">About</button>
+        <button route="/mywebsite/contact">Contact</button>
         <button id="darkButton" onclick="darkMode()">Dark</button>
       </div>
     </div>
@@ -39,7 +39,7 @@
       } else document.body.classList.remove("dark-mode");
 
       window.addEventListener("DOMContentLoaded", (event) => {
-        window.history.replaceState({}, "name", ["/mywebsite"]);
+        window.history.replaceState({}, "name", ["/mywebsite/home"]);
 
         //select app view
         const view = document.getElementById("view");
@@ -86,19 +86,19 @@
         };
         const myFirstRouter = new Router("myFirstRouter", [
           {
-            path: "/mywebsite/",
+            path: "/mywebsite/home",
             name: "Root",
             class: "home",
             teamplate: home(),
           },
           {
-            path: "/about",
+            path: "/mywebsite/about",
             name: "About",
             class: "about",
             teamplate: about(),
           },
           {
-            path: "/contact",
+            path: "/mywebsite/contact",
             name: "Contact",
             class: "contact",
             teamplate: contact(),
@@ -107,11 +107,11 @@
         //Home page as starting point
         const currentPath = window.location.pathname;
         if (
-          currentPath === "/mywebsite/" ||
+          currentPath === "/mywebsite/home" ||
           performance.navigation.type == performance.navigation.TYPE_RELOAD
         ) {
           console.log("page loaded again");
-          window.history.replaceState({}, "name", ["/mywebsite/"]);
+          window.history.replaceState({}, "name", ["/mywebsite/home"]);
           view.innerHTML = `<div class="${myFirstRouter.routes[0].class}"> ${myFirstRouter.routes[0].teamplate}</div>`;
         }
 
