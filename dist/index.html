@@ -8,6 +8,11 @@
     <link rel="icon" type="image/png" href="favv.png" />
     <link rel="stylesheet" href="style.css" />
   </head>
+  <script>
+    if (window.location.href != "https://minasxir.github.io/mywebsite") {
+      window.history.replaceState({}, "name", ["/mywebsite"]);
+    }
+  </script>
 
   <body>
     <div class="nav">
@@ -23,8 +28,9 @@
     </div>
     <div id="view"></div>
     <script>
-      //always start from home
       window.history.replaceState({}, "name", ["/mywebsite"]);
+      //always start from home
+
       //dark mode
       function darkMode() {
         document.body.classList.toggle("dark-mode");
