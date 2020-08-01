@@ -89,7 +89,7 @@
         };
         const myFirstRouter = new Router("myFirstRouter", [
           {
-            path: "/mywebsite",
+            path: "/",
             name: "Root",
             class: "home",
             teamplate: home(),
@@ -109,7 +109,7 @@
         ]);
         //Home page as starting point
         const currentPath = window.location.pathname;
-        if (currentPath === "/mywebsite") {
+        if (currentPath === "/") {
           view.innerHTML = `<div class="${myFirstRouter.routes[0].class}"> 
             ${myFirstRouter.routes[0].teamplate}</div>`;
         }
