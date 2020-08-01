@@ -8,13 +8,6 @@
     <link rel="icon" type="image/png" href="favv.png" />
     <link rel="stylesheet" href="style.css" />
   </head>
-  <script>
-    if (window.location.href != "https://minasxir.github.io/mywebsite") {
-      window.history.replaceState({}, "name", [
-        "https://minasxir.github.io/mywebsite",
-      ]);
-    }
-  </script>
 
   <body>
     <div class="nav">
@@ -30,9 +23,8 @@
     </div>
     <div id="view"></div>
     <script>
-      window.history.replaceState({}, "name", ["/mywebsite"]);
       //always start from home
-
+      window.history.replaceState({}, "name", ["/mywebsite"]);
       //dark mode
       function darkMode() {
         document.body.classList.toggle("dark-mode");
@@ -118,7 +110,16 @@
         //Home page as starting point
         const currentPath = window.location.pathname;
         if (currentPath === "/mywebsite") {
-          view.innerHTML = `<div class="${myFirstRouter.routes[0].class}"> ${myFirstRouter.routes[0].teamplate}</div>`;
+          view.innerHTML = `<div class="${myFirstRouter.routes[0].class}"> 
+            ${myFirstRouter.routes[0].teamplate}</div>`;
+        }
+        if (currentPath === "/about") {
+          view.innerHTML = `<div class="${myFirstRouter.routes[1].class}"> 
+            ${myFirstRouter.routes[1].teamplate}</div>`;
+        }
+        if (currentPath === "/contact") {
+          view.innerHTML = `<div class="${myFirstRouter.routes[2].class}"> 
+            ${myFirstRouter.routes[2].teamplate}</div>`;
         }
         //Static pages
         function home() {
