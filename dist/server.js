@@ -7,10 +7,10 @@ app.use(express.static(__dirname + "/public"));
 app.get("*", (req, res) => {
   res.sendFile("index.html", { root: path.join(__dirname, "/") });
 });
-app.get("*", (req, res) => {
+app.get("/about", (req, res) => {
   res.sendFile("index.html", { root: path.join(__dirname, "/about") });
 });
-app.get("*", (req, res) => {
+app.get("/contact", (req, res) => {
   res.sendFile("index.html", { root: path.join(__dirname, "/contact") });
 });
 
