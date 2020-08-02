@@ -6,6 +6,15 @@
     <title>Minas Xirakias</title>
     <link rel="stylesheet" href="style.css" />
     <link rel="icon" type="image/png" href="favv.png" sizes="16x16" />
+    <script>
+      (function () {
+        var redirect = sessionStorage.redirect;
+        delete sessionStorage.redirect;
+        if (redirect && redirect != location.href) {
+          history.replaceState(null, null, redirect);
+        }
+      })();
+    </script>
   </head>
 
   <body>
@@ -212,7 +221,7 @@
                   .scrollIntoView({ behavior: "smooth" });
               });
             }
-            if (laka[i].innerHTML === "Go Middle") {
+            if (laka[i].innerHTML === "Go Top") {
               laka[i].addEventListener("click", () => {
                 document
                   .querySelector(".about-top")
