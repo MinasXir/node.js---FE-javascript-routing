@@ -211,7 +211,8 @@
                   .querySelector(".about-bottom")
                   .scrollIntoView({ behavior: "smooth" });
               });
-            } else {
+            }
+            if (laka[i].innerHTML === "Go Middle") {
               laka[i].addEventListener("click", () => {
                 document
                   .querySelector(".about-top")
