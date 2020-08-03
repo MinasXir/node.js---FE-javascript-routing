@@ -41,6 +41,7 @@
 
       window.addEventListener("DOMContentLoaded", (event) => {
         //select app view
+        window.history.replaceState({}, "name", [`/mywebsite/`]);
 
         const view = document.getElementById("view");
 
@@ -58,11 +59,7 @@
           !routInfo
             ? alert("No content here")
             : window.history.pushState({}, "name", routInfo.path);
-          view.innerHTML = `<div class="${routInfo.class}">${routInfo.template} </div>`;
-          localStorage.setItem("route", `${routInfo.path}`);
-          localStorage.setItem("class", `${routInfo.class}`);
-          localStorage.setItem("template", `${routInfo.template}`);
-
+          view.innerHTML = `<div class="${routInfo.class}">${routInfo.teamplate} </div>`;
           activeRoute(eEvent);
           aboutNav();
         }
@@ -92,32 +89,25 @@
             path: "/mywebsite/",
             name: "Root",
             class: "home",
-            template: home(),
+            teamplate: home(),
           },
           {
             path: "/about",
             name: "About",
             class: "about",
-            template: about(),
+            teamplate: about(),
           },
           {
             path: "/contact",
             name: "Contact",
             class: "contact",
-            template: contact(),
+            teamplate: contact(),
           },
         ]);
         //Home page as starting point
         const currentPath = window.location.pathname;
         if (currentPath === "/mywebsite/") {
-          view.innerHTML = `<div class="${myFirstRouter.routes[0].class}"> ${myFirstRouter.routes[0].template}</div>`;
-        } else {
-          window.history.replaceState({}, "name", [
-            `${localStorage.getItem("route")}`,
-          ]);
-          view.innerHTML = `<div class=${localStorage.getItem("cssClass")}>
-          ${localStorage.getItem("template")}</div>
-          `;
+          view.innerHTML = `<div class="${myFirstRouter.routes[0].class}"> ${myFirstRouter.routes[0].teamplate}</div>`;
         }
 
         //Static pages
