@@ -41,7 +41,6 @@
 
       window.addEventListener("DOMContentLoaded", (event) => {
         //select app view
-        window.history.replaceState({}, "name", [`/mywebsite/`]);
 
         const view = document.getElementById("view");
 
@@ -59,7 +58,10 @@
           !routInfo
             ? alert("No content here")
             : window.history.pushState({}, "name", routInfo.path);
-          view.innerHTML = `<div class="${routInfo.class}">${routInfo.teamplate} </div>`;
+          view.innerHTML = `<div class="${routInfo.class}">${routInfo.template} </div>`;
+          localStorage.setItem("route", `${routInfo.path}`);
+          localStorage.setItem("cssClass", `${routInfo.class}`);
+          localStorage.setItem("template", `${routInfo.template}`);
           activeRoute(eEvent);
           aboutNav();
         }
@@ -89,25 +91,33 @@
             path: "/mywebsite/",
             name: "Root",
             class: "home",
-            teamplate: home(),
+            template: home(),
           },
           {
             path: "/about",
             name: "About",
             class: "about",
-            teamplate: about(),
+            template: about(),
           },
           {
             path: "/contact",
             name: "Contact",
             class: "contact",
-            teamplate: contact(),
+            template: contact(),
           },
         ]);
         //Home page as starting point
         const currentPath = window.location.pathname;
         if (currentPath === "/mywebsite/") {
-          view.innerHTML = `<div class="${myFirstRouter.routes[0].class}"> ${myFirstRouter.routes[0].teamplate}</div>`;
+          view.innerHTML = `<div class="${myFirstRouter.routes[0].class}"> ${myFirstRouter.routes[0].template}</div>`;
+        }
+        if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
+          window.history.replaceState({}, "name", [
+            `${localStorage.getItem("route")}`,
+          ]);
+          view.innerHTML = `<div class=${localStorage.getItem("cssClass")}>
+          ${localStorage.getItem("template")}</div>
+          `;
         }
 
         //Static pages
