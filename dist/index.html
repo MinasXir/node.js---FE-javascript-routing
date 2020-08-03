@@ -41,7 +41,6 @@
 
       window.addEventListener("DOMContentLoaded", (event) => {
         //select app view
-        window.history.replaceState({}, "name", [`/mywebsite/`]);
 
         const view = document.getElementById("view");
 
@@ -60,6 +59,9 @@
             ? alert("No content here")
             : window.history.pushState({}, "name", routInfo.path);
           view.innerHTML = `<div class="${routInfo.class}">${routInfo.teamplate} </div>`;
+          localStorage.setItem("route", `${routInfo.path}`);
+          localStorage.setItem("cssClass", `${routInfo.class}`);
+          localStorage.setItem("template", `${routInfo.teamplate}`);
           activeRoute(eEvent);
           aboutNav();
         }
@@ -233,6 +235,9 @@
               )[1].classList.add("active");
             });
           aboutScrollLinks();
+        }
+        if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
+          view.innerHTML = localStorage.getItem("template");
         }
       });
     </script>
