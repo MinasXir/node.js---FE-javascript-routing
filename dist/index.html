@@ -237,7 +237,12 @@
           aboutScrollLinks();
         }
         if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
-          view.innerHTML = localStorage.getItem("template");
+          window.history.replaceState({}, "name", [
+            `${localStorage.getItem("route")}`,
+          ]);
+          view.innerHTML = `<div class=${localStorage.getItem("cssClass")}>
+          ${localStorage.getItem("template")}</div>
+          `;
         }
       });
     </script>
