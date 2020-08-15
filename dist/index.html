@@ -14,7 +14,7 @@
         <h3>Minas Xirakias</h3>
       </div>
       <div class="links">
-        <button route="/mywebsite/" class="active">Home</button>
+        <button route="/mywebsite" class="active">Home</button>
         <button route="/about">About</button>
         <button route="/contact">Contact</button>
         <button id="darkButton" onclick="darkMode()">Dark</button>
@@ -89,7 +89,7 @@
         };
         const myFirstRouter = new Router("myFirstRouter", [
           {
-            path: "/mywebsite/",
+            path: "/mywebsite",
             name: "Root",
             class: "home",
             template: home(),
@@ -109,16 +109,8 @@
         ]);
         //Home page as starting point
         const currentPath = window.location.pathname;
-        if (currentPath === "/mywebsite/") {
+        if (currentPath === "/mywebsite") {
           view.innerHTML = `<div class="${myFirstRouter.routes[0].class}"> ${myFirstRouter.routes[0].template}</div>`;
-        }
-        if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
-          window.history.replaceState({}, "name", [
-            `${localStorage.getItem("route")}`,
-          ]);
-          view.innerHTML = `<div class=${localStorage.getItem("cssClass")}>
-          ${localStorage.getItem("template")}</div>
-          `;
         }
 
         //Static pages
