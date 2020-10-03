@@ -59,10 +59,8 @@
           !routInfo
             ? alert("No content here")
             : window.history.pushState({}, "name", routInfo.path);
+          window.history.replaceState({}, "name", [routInfo.path]);
           view.innerHTML = `<div class="${routInfo.class}">${routInfo.template} </div>`;
-          localStorage.setItem("route", `${routInfo.path}`);
-          localStorage.setItem("cssClass", `${routInfo.class}`);
-          localStorage.setItem("template", `${routInfo.template}`);
           activeRoute(eEvent);
           aboutNav();
         }
