@@ -30,7 +30,6 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  animation: fadein 1s;
 }
 
 .logo {
@@ -46,11 +45,12 @@ body {
   color: teal;
 }
 @keyframes fadein {
-  from {
-    opacity: 0;
+  0% {
+    transform: translateX(-2000px);
+    background-color: turquoise;
   }
-  to {
-    opacity: 1;
+  100% {
+    transform: translateX(0);
   }
 }
 .home,
@@ -59,6 +59,7 @@ body {
   height: 85vh;
   margin: 0 10vw;
   animation: fadein 1.5s;
+  background-color: transparent;
 }
 
 .about {
