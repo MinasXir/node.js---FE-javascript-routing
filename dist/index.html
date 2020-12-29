@@ -14,7 +14,7 @@
         <h3>Minas Xirakias</h3>
       </div>
       <div class="links">
-        <button route="/mywebsite" class="active">Home</button>
+        <button route="/mywebsite/" class="active">Home</button>
         <button route="/about">About</button>
         <button route="/contact">Contact</button>
         <button id="darkButton" onclick="darkMode()">Dark</button>
@@ -86,7 +86,7 @@
         };
         const myFirstRouter = new Router("myFirstRouter", [
           {
-            path: "/mywebsite",
+            path: "/mywebsite/",
             name: "Root",
             class: "home",
             template: home(),
@@ -108,6 +108,14 @@
         const currentPath = window.location.pathname;
         if (currentPath === "/mywebsite/") {
           view.innerHTML = `<div class="${myFirstRouter.routes[0].class}"> ${myFirstRouter.routes[0].template}</div>`;
+        }
+        else{
+          const routInfo = myFirstRouter.routes.filter((r) => {
+            return r.path === currentPath
+          })[0];
+          routInfo
+            ? view.innerHTML = `<div class="${routInfo.class}">${routInfo.template} </div>`
+            : alert("No content here");
         }
 
         //Static pages
