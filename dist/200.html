@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Minas Xirakias</title>
+    <link rel="stylesheet" href="public/style.css" />
+    <link rel="icon" type="image/png" href="public/favv.png" sizes="16x16" />
+</head>
+
+<body>
+    <div class="nav">
+        <div class="logo">
+            <h3>Minas Xirakias</h3>
+        </div>
+        <div class="links">
+            <button route="/mywebsite/" class="active">Home</button>
+            <button route="/about">About</button>
+            <button route="/contact">Contact</button>
+            <button id="darkButton" onclick="darkMode()">Dark</button>
+        </div>
+    </div>
+    <div id="view"></div>
+    <script>
+        //dark mode
+        function darkMode() {
+            document.body.classList.toggle("dark-mode");
+            const darkButton = document.getElementById("darkButton");
+            darkButton.innerHTML === "Dark"
+                ? (darkButton.innerHTML = "Light") &&
+                localStorage.setItem("mode", "dark")
+                : (darkButton.innerHTML = "Dark") &&
+                localStorage.removeItem("mode", "dark");
+        }
+
+        //save dark mode in local storage if page refresh
+        if (localStorage.getItem("mode") == "dark") {
+            document.body.classList.add("dark-mode");
+            darkButton.innerHTML = "Light";
+        } else document.body.classList.remove("dark-mode");
+
+        window.addEventListener("DOMContentLoaded", (event) => {
+            //select app view
+
+            const view = document.getElementById("view");
+
+            //select all buttons
+            const activeRoutes = Array.from(
+                document.querySelectorAll(".links [route]")
+            );
+
+            //Function for navigation
+            function navigate(eEvent) {
+                const route = eEvent.target.attributes[0].value;
+                const routInfo = myFirstRouter.routes.filter((r) => {
+                    return r.path === route;
+                })[0];
+                !routInfo
+                    ? alert("No content here")
+                    : window.history.pushState({}, "name", routInfo.path);
+                view.innerHTML = `<div class="${routInfo.class}">${routInfo.template} </div>`;
+                activeRoute(eEvent);
+                aboutNav();
+            }
+            //click event trigers navigation function
+            activeRoutes.forEach((route) => {
+                route.addEventListener("click", navigate, true);
+            });
+
+            //Active color on nav item click
+            function activeRoute(eEvent) {
+                const buttons = Array.from(document.querySelectorAll("button"));
+                buttons.forEach((button) => {
+                    button.classList.remove("active");
+                });
+                eEvent.target.className = "active";
+            }
+
+            //data constructor
+            const Router = function (name, routes) {
+                return {
+                    name: name,
+                    routes: routes,
+                };
+            };
+            const myFirstRouter = new Router("myFirstRouter", [
+                {
+                    path: "/mywebsite/",
+                    name: "Root",
+                    class: "home",
+                    template: home(),
+                },
+                {
+                    path: "/about",
+                    name: "About",
+                    class: "about",
+                    template: about(),
+                },
+                {
+                    path: "/contact",
+                    name: "Contact",
+                    class: "contact",
+                    template: contact(),
+                },
+            ]);
+            //Home page as starting point
+            const currentPath = window.location.pathname;
+            if (currentPath === "/mywebsite/") {
+                view.innerHTML = `<div class="${myFirstRouter.routes[0].class}"> ${myFirstRouter.routes[0].template}</div>`;
+            }
+            else {
+                const routInfo = myFirstRouter.routes.filter((r) => {
+                    return r.path === currentPath
+                })[0];
+                routInfo
+                    ? view.innerHTML = `<div class="${routInfo.class}">${routInfo.template} </div>`
+                    : alert("No content here");
+            }
+
+            //Static pages
+            function home() {
+                return `
+           <div>
+                <h2>
+                Hi , I'm Minas a UI <span>developer</span> and UX <span>designer</span> <br>based in Amsterdam.
+                </h2>
+                <br>
+                <button route="/about">About me</button>
+                </div>
+                <div id="container">
+  <div id="inner"></div>
+</div>
+
+                 `;
+            }
+            function about() {
+                const aboutData = {
+                    titleAbout: "My story in few lines",
+                    descriptionAbout:
+                        "Objects , arrays , click events , AJAX requests and more... are some of the words that could describe my everyday life for the last 6 years. You might hear me talking about svg animations with css 3 or how nice and easy is the combination of css grid with flex for responsive web design.",
+                    titleSkills: "Coding",
+                    skills: [
+                        { name: "Vanilla Javascript", level: "medior" },
+                        { name: "CSS", level: "senior" },
+                        { name: "HTML", level: "senior" },
+                        { name: "React", level: "medior" },
+                        { name: "Web Components", level: "medior" },
+                    ],
+                    titleSkillsDesign: "Design",
+                    skillsDesign: [
+                        { name: "Adobe Photoshop", level: "senior" },
+                        { name: " Adobe Illustrator", level: "senior" },
+                        { name: "Adobe Indesign", level: "medior" },
+                        { name: "Camptasia", level: "medior" },
+                    ],
+                };
+                aboutNav();
+                return ` 
+               <div id="about-top" class="about-top"><h2>${aboutData.titleAbout
+                    }</h2><br>
+               ${aboutData.descriptionAbout}
+               <div class="box-right">
+              <h4>Go Middle</h4>
+              </div>
+               </div>
+               <div id="about-middle" class="about-middle">
+               <div>
+               ${aboutData.titleSkills}
+               <br>
+                ${aboutData.skills
+                        .map(
+                            (skill) =>
+                                `
+               ${skill.name}
+               ${skill.level}<br>
+               `
+                        )
+                        .join("")}
+               </div>
+               <div>
+               ${aboutData.titleSkillsDesign}<br>${aboutData.skillsDesign
+                        .map(
+                            (skill) =>
+                                `
+               ${skill.name}
+               ${skill.level}<br>
+               `
+                        )
+                        .join("")}
+               </div>
+               <div class="box-right">
+               <h4>Go Top</h4>
+               <h4>Go Bottom</h4>
+               </div>
+               </div>
+               <div id="about-bottom" class="about-bottom">
+               <div class="box-right">
+              <h4>Go Top</h4>
+               <h4>Go Middle</h4>
+               </div>
+                </div>
+                 `;
+            }
+            function contact() {
+                return `contact `;
+            }
+            aboutNav();
+
+            function aboutScrollLinks() {
+                const laka = Array.from(document.querySelectorAll("h4"));
+                var i;
+                for (i = 0; i < laka.length; i++) {
+                    if (laka[i].innerHTML === "Go Middle") {
+                        laka[i].addEventListener("click", () => {
+                            document
+                                .querySelector(".about-middle")
+                                .scrollIntoView({ behavior: "smooth" });
+                        });
+                    }
+                    if (laka[i].innerHTML === "Go Bottom") {
+                        laka[i].addEventListener("click", () => {
+                            document
+                                .querySelector(".about-bottom")
+                                .scrollIntoView({ behavior: "smooth" });
+                        });
+                    }
+                    if (laka[i].innerHTML === "Go Top") {
+                        laka[i].addEventListener("click", () => {
+                            document
+                                .querySelector(".about-top")
+                                .scrollIntoView({ behavior: "smooth" });
+                        });
+                    }
+                }
+            }
+
+            //link to about page on homepage as button
+            function aboutNav() {
+                const btn = document.querySelector(".home button");
+                if (btn)
+                    btn.addEventListener("click", (eEvent) => {
+                        navigate(eEvent);
+                        Array.from(
+                            document.querySelectorAll(".links [route]")
+                        )[1].classList.add("active");
+                    });
+                aboutScrollLinks();
+            }
+        });
+    </script>
+</body>
+
+</html>
