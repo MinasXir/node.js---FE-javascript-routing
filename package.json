@@ -2,9 +2,9 @@
   "name": "page",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "dist/server.js",
   "scripts": {
-    "start": "node server.js",
+    "start": "node dist/server.js",
     "deploy": "gh-pages -d dist",
     "dev": "node dist/server.js"
   },

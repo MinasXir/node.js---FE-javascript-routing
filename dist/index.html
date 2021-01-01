@@ -103,17 +103,8 @@
           },
         ]);
         //Home page as starting point
-        const currentPath = window.location.pathname;
-        if (currentPath === "/mywebsite/") {
-          view.innerHTML = `<div class="${myFirstRouter.routes[0].class}"> ${myFirstRouter.routes[0].template}</div>`;
-        } else {
-          const routInfo = myFirstRouter.routes.filter((r) => {
-            return r.path === currentPath;
-          })[0];
-          routInfo
-            ? (view.innerHTML = `<div class="${routInfo.class}">${routInfo.template} </div>`)
-            : alert("No content here");
-        }
+
+        view.innerHTML = `<div class="${myFirstRouter.routes[0].class}"> ${myFirstRouter.routes[0].template}</div>`;
 
         //Static pages
         function home() {

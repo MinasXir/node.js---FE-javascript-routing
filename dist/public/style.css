@@ -65,20 +65,11 @@ body {
   align-items: center;
 }
 
-#container {
-  perspective: 25px;
-  overflow-y: hidden;
-}
-
 #inner {
   width: 20em;
   height: 28em;
-  background: url("http://localhost:3000/as.png") center/cover;
+  background: url("./images/as.png") center/cover;
   box-shadow: 2px 2px 50px rgba(0, 0, 0, 0.2);
-  transition: transform 0.5s;
-  -webkit-transition: transform 0.5s;
-  -moz-transition: transform 0.5s;
-  -o-transition: transform 0.5s;
 }
 
 .about {
@@ -143,7 +134,7 @@ button:hover {
   font-weight: 700;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 1024px) {
   .nav {
     justify-content: space-between;
   }
@@ -153,6 +144,12 @@ button:hover {
   #view > * {
     width: 96vw;
     margin: 0% 2%;
+  }
+  .home {
+    display: block;
+  }
+  .home > * {
+    margin: 10px 0px;
   }
   .about > * {
     width: 92vw;
