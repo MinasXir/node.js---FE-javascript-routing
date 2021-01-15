@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Minas Xirakias</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <div class="nav">
+      <div class="logo">
+        <h1>LOGO</h1>
+      </div>
+      <div class="links">
+        <button route="/">Home</button>
+        <button route="/about">About</button>
+        <button route="/contact">Contact</button>
+        <button id="darkButton" onclick="darkMode()">Dark</button>
+      </div>
+    </div>
+    <div id="view"></div>
+    
+    <script>
+      window.addEventListener("DOMContentLoaded", (event) => {
+        //select app view
+        const view = document.getElementById("view");
+
+        //select all buttons
+        const activeRoutes = Array.from(
+          document.querySelectorAll(".links [route]")
+        );
+
+        //Function for navigation and rendering
+        function navigate(eEvent) {
+          const route = eEvent.target.attributes[0].value;
+          const routInfo = myFirstRouter.routes.filter((r) => {
+            return r.path === route;
+          })[0];
+          !routInfo
+            ? alert("No content here")
+            : window.history.pushState({}, "name", routInfo.path);
+          view.innerHTML = `<div class="${routInfo.class}">${routInfo.template} </div>`;
+        }
+
+        //click event trigers navigation function
+        activeRoutes.forEach((route) => {
+          route.addEventListener("click", navigate, true);
+        });
+
+        //data constructor
+        const Router = function (name, routes) {
+          return {
+            name: name,
+            routes: routes,
+          };
+        };
+        const myFirstRouter = new Router("myFirstRouter", [
+          {
+            path: "/",
+            name: "Root",
+            class: "home",
+            template: home(),
+          },
+          {
+            path: "/about",
+            name: "About",
+            class: "about",
+            template: about(),
+          },
+          {
+            path: "/contact",
+            name: "Contact",
+            class: "contact",
+            template: contact(),
+          },
+        ]);
+
+        //Home page path "/" as starting point
+        const currentPath = window.location.pathname;
+        if (currentPath === "/") 
+          view.innerHTML = `<div class="${myFirstRouter.routes[0].class}"> ${myFirstRouter.routes[0].template}</div>`;
+
+        //Pages
+        function home() {
+          return `
+                <h2>Home page</h2>
+                 `;
+        }
+        function about() {
+          return ` 
+               <h2>About page</h2>
+                 `;
+        }
+        function contact() {
+          return `<h2>Contact page</h2>`;
+        }
+      });
+
+            //dark mode
+              function darkMode() {
+                document.body.classList.toggle("dark-mode");
+                const darkButton = document.getElementById("darkButton");
+                darkButton.innerHTML === "Dark"
+                  ? (darkButton.innerHTML = "Light") &&
+                  localStorage.setItem("mode", "dark")
+                  : (darkButton.innerHTML = "Dark") &&
+                  localStorage.removeItem("mode", "dark");
+              }
+
+              //save dark mode in local storage if page refresh
+              if (localStorage.getItem("mode") == "dark") {
+                document.body.classList.add("dark-mode");
+                darkButton.innerHTML = "Light";
+              } else document.body.classList.remove("dark-mode");
+    </script>
+  </body>
+</html>
