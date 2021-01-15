@@ -1,10 +1,16 @@
 # node.js---FE-javascript-routing
 
-Make sure node.js is installed on your machine.
+1)Make sure node.js is installed on your machine.
 
-Open a termnal and type-->  npm start
+2)Download on clone the project.
 
+3)Open a terminal and type the bellow 2 commands
 
+npm install
 
+npm start
 
-This will start a node.js server witch will serve the app on port 3000
+As a result all the necessary packages will be installed and the app will start on port 3000 via express. 
+
+Description:
+javascript-routing-with-node.js-server is simple one page application that renders different pages-content dynamicaly , based on the url-pathname state.
