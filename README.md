@@ -2,7 +2,7 @@
 
 1)Make sure node.js is installed on your machine.
 
-2)Download or clone the project.
+2)Download or clone the repo.
 
 3)Open a terminal and type the 2 bellow commands
 
