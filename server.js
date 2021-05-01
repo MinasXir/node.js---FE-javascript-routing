@@ -1,20 +1,26 @@
 const express = require("express");
-let app = express();
+const app = express();
 const port = 3000;
+const bodyParser = require("body-parser");
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use(bodyParser.raw());
 
-// server your css as static
-app.use(express.static(__dirname + '/public'))
+app.use(express.static(__dirname + "/public"));
 
-app.get("/", function (req, res) {
-  res.sendFile(__dirname + "/index.html");
-})
-app.get("/about", function (req, res) {
-  res.sendFile(__dirname + "/index.html");
-})
-app.get("/contact", function (req, res) {
-  res.sendFile(__dirname + "/index.html");
-})
+app.get(/.*page$/, (req, res) => {
+  res.sendFile('./public/index.html', { root: __dirname });
+});
 
-app.listen(port, () =>
-  console.log(`Example app listening at http://localhost:${port}`)
-);
+app.get("/content", (req, res) => {
+  res.json({ msg: "Home Page" });
+});
+app.get("/aboutpagecontent", (req, res) => {
+  res.json({ msg: "About Page" });
+});
+app.get("/contactpagecontent", (req, res) => {
+  res.json({ msg: "Contact Page" });
+});
+app.listen(port, () => {
+  console.log(`Example app listening at http://localhost:${port}`);
+});
