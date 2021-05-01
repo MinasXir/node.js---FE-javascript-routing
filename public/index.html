@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" type="text/css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="nav">
+      <div class="logo">
+        <h1>LOGO</h1>
+      </div>
+      <div class="links">
+        <button route="/">Home</button>
+        <button route="/aboutpage">About</button>
+        <button route="/contactpage">Contact</button>
+        <button id="darkButton" onclick="darkMode()">Dark</button>
+      </div>
+    </div>
+    <div class="content">Welcome</div>
+    <script>
+      //select content class
+      const messageFromServer = document.querySelector(".content");
+
+      //select all buttons
+      const activeRoutes = Array.from(
+        document.querySelectorAll(".links [route]")
+      );
+
+      // navigation
+      function navigate(eEvent) {
+        const route = eEvent.target.attributes[0].value;
+        window.history.pushState({}, "name", route);
+        getData();
+      }
+
+      //get and render content based on server response
+      function getData() {
+        fetch(`${window.location.pathname}content`)
+          .then((response) => response.json())
+          .then((data) => {
+            document.querySelector(".content").innerText = data.msg;
+          });
+      }
+      getData();
+
+      //click event trigers navigation function
+      activeRoutes.forEach((route) => {
+        route.addEventListener("click", navigate, true);
+      });
+
+      //dark mode
+      function darkMode() {
+        document.body.classList.toggle("dark-mode");
+        const darkButton = document.getElementById("darkButton");
+        darkButton.innerText === "Dark"
+          ? (darkButton.innerText = "Light") &&
+            sessionStorage.setItem("mode", "dark")
+          : (darkButton.innerText = "Dark") &&
+            sessionStorage.removeItem("mode", "dark");
+      }
+
+      //save dark mode in local storage if page refresh
+      if (sessionStorage.getItem("mode") == "dark") {
+        document.body.classList.add("dark-mode");
+        darkButton.innerText = "Light";
+      } else document.body.classList.remove("dark-mode");
+    </script>
+  </body>
+</html>
