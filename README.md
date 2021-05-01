@@ -1,4 +1,4 @@
-# node.js---FE-javascript-routing
+# javascript routing system with pushState api and express server
 
 1)Make sure node.js is installed on your machine.
 
@@ -8,7 +8,6 @@
 
 npm install
 
-npm start
 
 As a result, all the necessary packages will be installed and the app will start on port 3000 via express. 
 
