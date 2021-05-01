@@ -4,13 +4,15 @@
 
 2)Download or clone the repo.
 
-3)Open a terminal and type the 2 bellow commands
+3)Open a terminal in the directory of the cloned project and and type the 2 bellow commands
 
 npm install
 
+nodemon server.js
 
-As a result, all the necessary packages will be installed and the app will start on port 3000 via express. 
+
+As a result, all the necessary packages will be installed and the app will start on port 3000 via express server. 
 
 Description:
-javascript-routing-with-node.js-server is simple one page application that renders different pages-content dynamicaly , based on the url-pathname state.
+ One page application that renders asynchronously different pages-content dynamicaly , based on the url-pathname state and get requests.
 
